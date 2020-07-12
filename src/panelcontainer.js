@@ -2,8 +2,16 @@ import React from 'react';
 import {Panel} from './panel';
 
 export class PanelContainer extends React.Component {
-    renderPanels (i) {
+    renderPanel (i) {
         return <Panel number={i}/>;
+    }
+
+    generatePanels (i) {
+        let panels = [];
+        for (let a = 0; a < i; a++) {
+            panels.push(this.renderPanel(a));
+        }
+        return panels;
     }
 
     render () {
@@ -12,10 +20,7 @@ export class PanelContainer extends React.Component {
                 <div 
                     className="panel-wrapper slide-in" 
                     style={{transform: `translateY(${this.props.position})`}}>
-                        {this.renderPanels(1)}
-                        {this.renderPanels(2)}
-                        {this.renderPanels(3)}
-                        {this.renderPanels(4)}
+                        {this.generatePanels(this.props.panelCount)}
                 </div>
             </div>
         )

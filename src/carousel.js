@@ -9,7 +9,7 @@ export class Carousel extends React.Component {
         super(props);
         this.state = {
            position: 0,
-           buttonArr: Array(4).fill('skyblue')
+           buttonArr: Array(5).fill('skyblue')
         }
     }
 
@@ -42,9 +42,12 @@ export class Carousel extends React.Component {
     render () {
         return (
             <div className="carousel">
-                <PanelContainer position={this.state.position}/> 
+                <PanelContainer 
+                    panelCount="5"
+                    position={this.state.position}/> 
                 <Menu 
                     buttonColor={this.state.buttonArr}
+                    panelCount="5"
                     onClick={(i) => this.handleClick(i)}/>
             </div> 
         );
