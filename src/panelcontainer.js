@@ -7,13 +7,11 @@ export class PanelContainer extends React.Component {
     }
 
     render () {
-        const classes = `panel-wrapper ${this.props.transition}`;
         return (
             <div className="panel-container">
                 <div 
-                    className={classes} 
-                    style={{ 
-                        transform: `translateY(${this.props.position})`}}>
+                    className="panel-wrapper slide-in" 
+                    style={{transform: `translateY(${this.props.position})`}}>
                         {this.renderPanels(1)}
                         {this.renderPanels(2)}
                         {this.renderPanels(3)}
@@ -25,6 +23,5 @@ export class PanelContainer extends React.Component {
 }
 
 PanelContainer.defaultProps = {
-    position: '0',
-    transition: ''
+    position: '0'
 }

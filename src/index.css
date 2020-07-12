@@ -47,7 +47,7 @@ code {
   /* transform:translateY(-200%); */
 }
 
-.slideIn {
+.slide-in {
   transition:transform 1s;
 }
 

@@ -9,7 +9,6 @@ export class Carousel extends React.Component {
         super(props);
         this.state = {
            position: 0,
-           visible: false
         }
     }
 
@@ -17,10 +16,8 @@ export class Carousel extends React.Component {
         // change panel
         let newPosition = (i - 1) * -100; 
         newPosition += '%';
-        console.log(newPosition);
         this.setState({
             position: newPosition,
-            visible: true
         });
     }
 
@@ -28,8 +25,7 @@ export class Carousel extends React.Component {
         return (
             <div className="carousel">
                 <PanelContainer 
-                    position={this.state.position} 
-                    transition={this.state.visible ? 'slideIn' : ''}/> 
+                    position={this.state.position}/> 
                 <Menu onClick={(i) => this.handleClick(i)}/>
             </div> 
         );
