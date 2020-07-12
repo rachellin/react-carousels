@@ -5,8 +5,8 @@ export class Menu extends React.Component {
     renderButton (i) {
         return (
             <Button 
-            number={i}
-            onClick={this.props.onClick}/>
+                number={i}
+                onClick={() => this.props.onClick(i)}/>
         );
     }
 
