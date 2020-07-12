@@ -9,24 +9,43 @@ export class Carousel extends React.Component {
         super(props);
         this.state = {
            position: 0,
+           buttonArr: Array(4).fill('skyblue')
         }
+    }
+
+    changeButtonColor (i) {
+        let color;
+        let buttonArr = this.state.buttonArr.slice();
+        for (let a = 0; a < buttonArr.length; a++) {
+            if (a == i) {
+                buttonArr[a] = 'lightpink';
+            } else {
+                buttonArr[a] = 'skyblue';
+            }
+        }
+        return buttonArr;
     }
 
     handleClick (i) {
         // change panel
-        let newPosition = (i - 1) * -100; 
+        let newPosition = i * -100; 
         newPosition += '%';
+        console.log(this.state.buttonArr);
+        // change clicked on button color
+        let newArr = this.changeButtonColor(i);
         this.setState({
             position: newPosition,
+            buttonArr: newArr
         });
     }
 
     render () {
         return (
             <div className="carousel">
-                <PanelContainer 
-                    position={this.state.position}/> 
-                <Menu onClick={(i) => this.handleClick(i)}/>
+                <PanelContainer position={this.state.position}/> 
+                <Menu 
+                    buttonColor={this.state.buttonArr}
+                    onClick={(i) => this.handleClick(i)}/>
             </div> 
         );
     };
