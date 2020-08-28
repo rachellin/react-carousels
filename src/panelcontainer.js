@@ -3,7 +3,11 @@ import {Panel} from './panel';
 
 export class PanelContainer extends React.Component {
     renderPanel (i) {
-        return <Panel number={i}/>;
+        return (
+            <Panel 
+                panelContent={this.props.panelContent[i]}
+                number={i}/>
+        );
     }
 
     generatePanels (i) {

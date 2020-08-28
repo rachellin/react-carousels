@@ -31,7 +31,6 @@ code {
   justify-content:center;
 }
 
-/* TO DO: panel container */
 .panel-container {
   background:#999;
   width:85%;
@@ -40,9 +39,8 @@ code {
 }
 
 .panel-wrapper {
-  border:1px solid salmon;
+  /* border:1px solid salmon; */
   height:100%;
-  transition:translateY 1s;
   /* padding:2rem; */
   /* transform:translateY(-200%); */
 }
@@ -74,7 +72,7 @@ code {
 }
 
 .panel-content {
-  border:1px solid darkgreen;
+  /* border:1px solid darkgreen; */
   padding:2rem;
   height:100%;
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import CSSTransitionGroup from 'react-transition-group';
 
 import { PanelContainer } from './panelcontainer';
 import { Menu } from './menu';
@@ -9,8 +8,16 @@ export class Carousel extends React.Component {
         super(props);
         this.state = {
            position: 0,
-           buttonArr: Array(5).fill('skyblue')
+           panels: 6,
+           buttonArr: Array(1).fill('skyblue'),
+           panelContent: [panel1, panel2, panel3, panel4, panel5, panel6]
         }
+    }
+
+    componentDidMount () {
+        this.setState({
+            buttonArr: Array(this.state.panels).fill('skyblue')
+        });
     }
 
     changeButtonColor (i) {
@@ -43,13 +50,22 @@ export class Carousel extends React.Component {
         return (
             <div className="carousel">
                 <PanelContainer 
-                    panelCount="5"
-                    position={this.state.position}/> 
+                    panelCount={this.state.panels}
+                    position={this.state.position}
+                    panelContent={this.state.panelContent}/> 
                 <Menu 
                     buttonColor={this.state.buttonArr}
-                    panelCount="5"
+                    panelCount={this.state.panels}
                     onClick={(i) => this.handleClick(i)}/>
             </div> 
         );
     };
 }
+
+// panel content
+const panel1 = 'asdfasdf';
+const panel2 = 'panel deux';
+const panel3 = 'trois';
+const panel4 = 'quatre';
+const panel5 = 'cinq';
+const panel6 = 'six';

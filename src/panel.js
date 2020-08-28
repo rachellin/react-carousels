@@ -6,9 +6,10 @@ export class Panel extends React.Component {
         return (
             <div className="panel">
                 <div className="panel-content">
-                    panel {this.props.number}
+                    {this.props.panelContent ? this.props.panelContent : `panel ${this.props.number}`}
                 </div>
             </div>
         )
     }
 }
+
