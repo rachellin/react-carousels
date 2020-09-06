@@ -3,7 +3,7 @@ import React from 'react';
 import { PanelContainer } from './panelcontainer';
 import { Menu } from './menu';
 
-export class Carousel extends React.Component {
+export class VerticalCarousel extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
