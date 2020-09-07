@@ -14,7 +14,7 @@ export class HorizontalCarousel extends React.Component {
            panels: this.props.panels,
            buttonArr: Array(1).fill('skyblue'),
            panelContent: [panel1, panel2, panel3, panel4, panel5, panel6],
-           pag: [false, true]
+           pag: [this.props.forever, true]
         }
     }
 
@@ -25,7 +25,9 @@ export class HorizontalCarousel extends React.Component {
     }
 
     componentDidUpdate () {
-        this.checkPagination();
+        if (!this.props.forever) {
+            this.checkPagination();
+        }
     }
 
     changeButtonColor (i) {
@@ -117,7 +119,7 @@ export class HorizontalCarousel extends React.Component {
 // default props
 HorizontalCarousel.defaultProps = {
     panels: 6,
-    forever: false
+    forever: true
 }
 
 // panel content
