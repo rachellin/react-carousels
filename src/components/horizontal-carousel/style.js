@@ -10,6 +10,7 @@ export const StyledCarousel = styled.div`
     transform:translateX(-50%);
     border: 1px solid #000;
     display: flex;
+    align-items: center;
 `
 
 export const CarouselWrapper = styled.div`
@@ -64,7 +65,11 @@ export const StyledButton = styled.div`
 `
 
 export const StyledPaginator = styled.button`
-    opacity: ${props => props.clickable ? "1" : "0"};
+    opacity: ${props => props.clickable ? "1" : "0.4"};
+
+    :hover {
+        cursor: ${props => props.clickable ? "pointer": "auto"};
+    }
 
     i {
         background: #FCF3D9;

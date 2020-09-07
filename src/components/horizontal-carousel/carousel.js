@@ -55,15 +55,21 @@ export class HorizontalCarousel extends React.Component {
     }
 
     handleArrow (dir) {
-        const currentPosition = this.state.position;
+        const currentPosition = Number(this.state.position.replace("%", ""))/-100;
         let newIndex;
         if (dir == "prev") {
-            newIndex = Number(currentPosition.replace("%", ""))/-100 - 1;
+            if (!this.state.pag[0]) {
+                return;
+            }
+            newIndex = currentPosition - 1;
             if (this.props.forever && newIndex < 0) {
                 newIndex = this.state.panels - 1;
             } 
         } else {
-            newIndex = Number(currentPosition.replace("%", ""))/-100 + 1;
+            if (!this.state.pag[1]) {
+                return;
+            }
+            newIndex = currentPosition + 1;
             if (this.props.forever && newIndex > this.state.panels - 1) {
                 newIndex = 0;
             } 
