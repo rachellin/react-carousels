@@ -2,18 +2,19 @@ import React from 'react';
 
 import { PanelContainer } from './panelcontainer';
 import { Menu } from './menu';
-import { Paginator } from './paginator';
+import { Arrow } from './arrow';
 
-import { StyledCarousel } from './style';
+import { StyledCarousel, CarouselWrapper } from './style';
 
 export class HorizontalCarousel extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
            position: "0%",
-           panels: 6,
+           panels: this.props.panels,
            buttonArr: Array(1).fill('skyblue'),
-           panelContent: [panel1, panel2, panel3, panel4, panel5, panel6]
+           panelContent: [panel1, panel2, panel3, panel4, panel5, panel6],
+           pag: [false, true]
         }
     }
 
@@ -21,6 +22,10 @@ export class HorizontalCarousel extends React.Component {
         this.setState({
             buttonArr: Array(this.state.panels).fill('skyblue')
         });
+    }
+
+    componentDidUpdate () {
+        this.checkPagination();
     }
 
     changeButtonColor (i) {
@@ -49,23 +54,19 @@ export class HorizontalCarousel extends React.Component {
         });
     }
 
-    paginate (dir) {
+    handleArrow (dir) {
         const currentPosition = this.state.position;
         let newIndex;
         if (dir == "prev") {
             newIndex = Number(currentPosition.replace("%", ""))/-100 - 1;
             if (this.props.forever && newIndex < 0) {
                 newIndex = this.state.panels - 1;
-            } else if (!this.props.forever && newIndex < 0) {
-                return;
-            }
+            } 
         } else {
             newIndex = Number(currentPosition.replace("%", ""))/-100 + 1;
             if (this.props.forever && newIndex > this.state.panels - 1) {
                 newIndex = 0;
-            } else if (!this.props.forever && newIndex > this.state.panels - 1) {
-                return;
-            }
+            } 
         }
         let newPosition = newIndex * -100;
         newPosition += "%";
@@ -76,19 +77,32 @@ export class HorizontalCarousel extends React.Component {
         })
     }
 
+    checkPagination () {
+        const currentPanel = Number(this.state.position.replace("%", ""))/-100;
+        if (currentPanel == this.state.panels - 1 && this.state.pag[1]) {
+            this.setState({ pag: [true, false] });
+        } else if (currentPanel == 0 && this.state.pag[0]) {
+            this.setState({ pag: [false, true] });
+        } else if (this.state.pag[0] !== this.state.pag[1] && ((currentPanel !== 0) && (currentPanel !== this.state.panels - 1))) {
+            this.setState({ pag: [true, true] });
+        }
+    }
+
     render () {
         return (
             <StyledCarousel>
-                <Paginator dir={"prev"} onClick={() => this.paginate("prev")}/>
-                <PanelContainer 
-                    panelCount={this.state.panels}
-                    position={this.state.position}
-                    panelContent={this.state.panelContent}/> 
-                <Menu 
-                    buttonColor={this.state.buttonArr}
-                    panelCount={this.state.panels}
-                    onClick={(i) => this.handleClick(i)}/>
-                <Paginator dir={"next"} onClick={() => this.paginate("next")}/>
+                <Arrow dir="prev" onClick={() => this.handleArrow("prev")} clickable={this.state.pag[0]}/>
+                <CarouselWrapper>
+                    <PanelContainer 
+                        panelCount={this.state.panels}
+                        position={this.state.position}
+                        panelContent={this.state.panelContent}/> 
+                    <Menu 
+                        buttonColor={this.state.buttonArr}
+                        panelCount={this.state.panels}
+                        onClick={(i) => this.handleClick(i)}/>
+                </CarouselWrapper>
+                <Arrow dir="next" onClick={() => this.handleArrow("next")} clickable={this.state.pag[1]}/>
             </StyledCarousel> 
         );
     };
@@ -96,6 +110,7 @@ export class HorizontalCarousel extends React.Component {
 
 // default props
 HorizontalCarousel.defaultProps = {
+    panels: 6,
     forever: false
 }
 

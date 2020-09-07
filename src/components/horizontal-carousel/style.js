@@ -5,17 +5,20 @@ import styled from 'styled-components';
 
 export const StyledCarousel = styled.div`
     position:fixed;
-    background:#f6f6f6;
-    width:50vw;
     top:80px;
     left:50%;
     transform:translateX(-50%);
     border: 1px solid #000;
+    display: flex;
+`
+
+export const CarouselWrapper = styled.div`
+
 `
 
 export const StyledPanelContainer = styled.div`
     background:#999;
-    width: 100%;
+    width: 50vw;
     height: 50vh;
     overflow-x: hidden;
 
@@ -57,6 +60,19 @@ export const StyledButton = styled.div`
 
     :hover {
         cursor: pointer;
+    }
+`
+
+export const StyledPaginator = styled.button`
+    opacity: ${props => props.clickable ? "1" : "0"};
+
+    i {
+        background: #FCF3D9;
+        border-radius: 50%;
+        width: 1rem;
+        height: 1rem;
+        font-size: 1rem;
+        padding: 0.5rem;
     }
 `
 
