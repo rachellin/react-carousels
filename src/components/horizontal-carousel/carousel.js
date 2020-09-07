@@ -19,8 +19,10 @@ export class HorizontalCarousel extends React.Component {
     }
 
     componentDidMount () {
+        let buttonArr = Array(this.state.panels).fill('skyblue');
+        buttonArr[0] = "lightpink";
         this.setState({
-            buttonArr: Array(this.state.panels).fill('skyblue')
+            buttonArr: buttonArr
         });
     }
 
