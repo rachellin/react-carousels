@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function Arrow (props) {
+export function Paginator (props) {
     return (
         <div onClick={props.onClick}>
             {props.dir == "prev" ? "<" : ">"}

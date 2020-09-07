@@ -2,7 +2,7 @@ import React from 'react';
 
 import { PanelContainer } from './panelcontainer';
 import { Menu } from './menu';
-import { Arrow } from './arrow';
+import { Paginator } from './paginator';
 
 import { StyledCarousel } from './style';
 
@@ -49,13 +49,23 @@ export class HorizontalCarousel extends React.Component {
         });
     }
 
-    handleArrow (dir) {
+    paginate (dir) {
         const currentPosition = this.state.position;
         let newIndex;
         if (dir == "prev") {
             newIndex = Number(currentPosition.replace("%", ""))/-100 - 1;
+            if (this.props.forever && newIndex < 0) {
+                newIndex = this.state.panels - 1;
+            } else if (!this.props.forever && newIndex < 0) {
+                return;
+            }
         } else {
             newIndex = Number(currentPosition.replace("%", ""))/-100 + 1;
+            if (this.props.forever && newIndex > this.state.panels - 1) {
+                newIndex = 0;
+            } else if (!this.props.forever && newIndex > this.state.panels - 1) {
+                return;
+            }
         }
         let newPosition = newIndex * -100;
         newPosition += "%";
@@ -69,7 +79,7 @@ export class HorizontalCarousel extends React.Component {
     render () {
         return (
             <StyledCarousel>
-                <Arrow dir={"prev"} onClick={() => this.handleArrow("prev")}/>
+                <Paginator dir={"prev"} onClick={() => this.paginate("prev")}/>
                 <PanelContainer 
                     panelCount={this.state.panels}
                     position={this.state.position}
@@ -78,10 +88,15 @@ export class HorizontalCarousel extends React.Component {
                     buttonColor={this.state.buttonArr}
                     panelCount={this.state.panels}
                     onClick={(i) => this.handleClick(i)}/>
-                <Arrow dir={"next"} onClick={() => this.handleArrow("next")}/>
+                <Paginator dir={"next"} onClick={() => this.paginate("next")}/>
             </StyledCarousel> 
         );
     };
+}
+
+// default props
+HorizontalCarousel.defaultProps = {
+    forever: false
 }
 
 // panel content
