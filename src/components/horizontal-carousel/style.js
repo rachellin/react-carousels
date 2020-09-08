@@ -35,7 +35,7 @@ export const StyledPanelContainer = styled.div`
 `
 
 export const StyledPanel = styled.div`
-    background:skyblue;
+    background: #f6f6f6;
     height:100%;
     min-width: 100%;
     display: inline-block;
@@ -47,17 +47,17 @@ export const StyledPanel = styled.div`
     }
 `
 export const StyledMenu = styled.div`
-    background:#999;
-    width:100%; 
+    width: 100%; 
     display: flex;
+    justify-content: center;
 `
 
 export const StyledButton = styled.div`
-    background:skyblue;
-    width:2rem;
-    height:2rem;
-    margin:2rem auto;
-    text-align:center;
+    background: #f6f6f6;
+    border-radius: 50%;
+    width: 0.8rem;
+    height: 0.8rem;
+    margin: 2rem 0.2rem;
 
     :hover {
         cursor: pointer;
